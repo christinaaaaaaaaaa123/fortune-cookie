@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Το χαρτάκι της τύχης</title>
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: #f5eee3;
+    color: #493b32;
+    font-family: Georgia, serif;
+    text-align: center;
+  }
+
+  main { max-width: 390px; width: 100%; }
+
+  .emoji { font-size: 48px; }
+
+  h1 {
+    font-size: 32px;
+    font-weight: normal;
+    margin: 16px 0 8px;
+  }
+
+  .subtitle {
+    color: #85776b;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+
+  .paper {
+    background: #fffdf6;
+    padding: 36px 24px;
+    margin: 28px 0;
+    box-shadow: 0 8px 25px #8a71501c;
+    border: 1px solid #e8ddc9;
+    transform: rotate(-1deg);
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .label {
+    font: 11px Arial, sans-serif;
+    letter-spacing: 3px;
+    color: #ae8c61;
+    margin-bottom: 18px;
+  }
+
+  #message {
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  button {
+    background: #715c49;
+    color: white;
+    border: 0;
+    padding: 16px 24px;
+    border-radius: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  button:hover { background: #574432; }
+
+  footer {
+    font: 12px Arial, sans-serif;
+    color: #948577;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="emoji">🥠</div>
+  <h1>Το χαρτάκι της τύχης</h1>
+  <p class="subtitle">Ένα μικρό μήνυμα, μόνο για σένα.</p>
+
+  <section class="paper">
+    <div class="label">ΤΟ ΜΗΝΥΜΑ ΣΟΥ</div>
+    <div id="message">Η τύχη σου σε περιμένει...</div>
+  </section>
+
+  <button onclick="drawFortune()">
+    ✨ Τράβα την τύχη σου
+  </button>
+
+  <footer>Πάρε ό,τι όμορφο σου φέρει η μέρα.</footer>
+</main>
+
+<script>
+const fortunes = [
+  "Κάτι όμορφο θα συμβεί όταν δεν το περιμένεις.",
+  "Μην υποτιμάς τη δύναμη ενός μικρού βήματος.",
+  "Ένα χαμόγελό σου μπορεί να αλλάξει τη μέρα κάποιου.",
+  "Τόλμησε αυτό που σκέφτεσαι εδώ και καιρό.",
+  "Η καλύτερη στιγμή για μια νέα αρχή είναι τώρα.",
+  "Μια ευχάριστη έκπληξη βρίσκεται στον δρόμο σου.",
+  "Εμπιστεύσου λίγο περισσότερο τον εαυτό σου.",
+  "Μερικές φορές, όλα συμβαίνουν για κάποιο λόγο.",
+  "Σήμερα αξίζεις λίγη παραπάνω αγάπη.",
+  "Μην ξεχνάς πόσο μακριά έχεις φτάσει."
+];
+
+let previous = -1;
+
+function drawFortune() {
+  let index;
+  do {
+    index = Math.floor(Math.random() * fortunes.length);
+  } while (fortunes.length > 1 && index === previous);
+
+  previous = index;
+  document.getElementById("message").textContent =
+    fortunes[index];
+}
+
+drawFortune();
+</script>
+</body>
+</html>
