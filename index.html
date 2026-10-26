@@ -1,133 +1,440 @@
 
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Το χαρτάκι της τύχης</title>
-<style>
-  * { box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8ee">
+  <title>Your Fortune Cookie 🥠</title>
 
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: #f5eee3;
-    color: #493b32;
-    font-family: Georgia, serif;
-    text-align: center;
-  }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-  main { max-width: 390px; width: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      background: linear-gradient(145deg, #fff4df, #f9e5cb);
+      color: #493526;
+    }
 
-  .emoji { font-size: 48px; }
+    .container {
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+    }
 
-  h1 {
-    font-size: 32px;
-    font-weight: normal;
-    margin: 16px 0 8px;
-  }
+    .cookie {
+      font-size: 66px;
+      margin-bottom: 8px;
+      animation: appear 0.5s ease;
+    }
 
-  .subtitle {
-    color: #85776b;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-  }
+    h1 {
+      font-size: 32px;
+      margin: 0 0 10px;
+      color: #744523;
+    }
 
-  .paper {
-    background: #fffdf6;
-    padding: 36px 24px;
-    margin: 28px 0;
-    box-shadow: 0 8px 25px #8a71501c;
-    border: 1px solid #e8ddc9;
-    transform: rotate(-1deg);
-    min-height: 180px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+    .subtitle {
+      font-family: Arial, sans-serif;
+      color: #92755f;
+      font-size: 14px;
+      margin-bottom: 26px;
+    }
 
-  .label {
-    font: 11px Arial, sans-serif;
-    letter-spacing: 3px;
-    color: #ae8c61;
-    margin-bottom: 18px;
-  }
+    .card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid #ecd6b9;
+      border-radius: 24px;
+      padding: 30px 22px;
+      box-shadow: 0 12px 35px rgba(105, 67, 33, 0.10);
+    }
 
-  #message {
-    font-size: 24px;
-    line-height: 1.5;
-  }
+    .label {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #b18454;
+      margin-bottom: 18px;
+    }
 
-  button {
-    background: #715c49;
-    color: white;
-    border: 0;
-    padding: 16px 24px;
-    border-radius: 30px;
-    font-size: 15px;
-    cursor: pointer;
-    width: 100%;
-  }
+    #fortune {
+      font-size: 24px;
+      line-height: 1.55;
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  button:hover { background: #574432; }
+    .divider {
+      width: 55px;
+      height: 2px;
+      background: #e6c79e;
+      margin: 24px auto;
+    }
 
-  footer {
-    font: 12px Arial, sans-serif;
-    color: #948577;
-    margin-top: 24px;
-  }
-</style>
+    .lucky-title {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: #947258;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    #numbers {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px;
+    }
+
+    .number {
+      width: 39px;
+      height: 39px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #f5e4cc;
+      color: #80502c;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      border: 1px solid #e8cda9;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 16px 18px;
+      border: none;
+      border-radius: 30px;
+      background: #98643c;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    button:hover {
+      background: #774a2b;
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .footer {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      line-height: 1.6;
+      color: #9a806a;
+      margin-top: 22px;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 380px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      #fortune {
+        font-size: 21px;
+      }
+
+      .card {
+        padding: 25px 16px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<main>
-  <div class="emoji">🥠</div>
-  <h1>Το χαρτάκι της τύχης</h1>
-  <p class="subtitle">Ένα μικρό μήνυμα, μόνο για σένα.</p>
+  <main class="container">
+    <div class="cookie">🥠</div>
+    <h1>Your Fortune Cookie</h1>
+    <p class="subtitle">A little message from the universe ✨</p>
 
-  <section class="paper">
-    <div class="label">ΤΟ ΜΗΝΥΜΑ ΣΟΥ</div>
-    <div id="message">Η τύχη σου σε περιμένει...</div>
-  </section>
+    <section class="card">
+      <div class="label">YOUR FORTUNE</div>
 
-  <button onclick="drawFortune()">
-    ✨ Τράβα την τύχη σου
-  </button>
+      <div id="fortune" aria-live="polite">
+        Your next little surprise is waiting...
+      </div>
 
-  <footer>Πάρε ό,τι όμορφο σου φέρει η μέρα.</footer>
-</main>
+      <div class="divider"></div>
 
-<script>
-const fortunes = [
-  "Κάτι όμορφο θα συμβεί όταν δεν το περιμένεις.",
-  "Μην υποτιμάς τη δύναμη ενός μικρού βήματος.",
-  "Ένα χαμόγελό σου μπορεί να αλλάξει τη μέρα κάποιου.",
-  "Τόλμησε αυτό που σκέφτεσαι εδώ και καιρό.",
-  "Η καλύτερη στιγμή για μια νέα αρχή είναι τώρα.",
-  "Μια ευχάριστη έκπληξη βρίσκεται στον δρόμο σου.",
-  "Εμπιστεύσου λίγο περισσότερο τον εαυτό σου.",
-  "Μερικές φορές, όλα συμβαίνουν για κάποιο λόγο.",
-  "Σήμερα αξίζεις λίγη παραπάνω αγάπη.",
-  "Μην ξεχνάς πόσο μακριά έχεις φτάσει."
-];
+      <div class="lucky-title">YOUR LUCKY NUMBERS</div>
+      <div id="numbers"></div>
+    </section>
 
-let previous = -1;
+    <button id="newFortune" type="button">
+      🥠 Open Another Cookie
+    </button>
 
-function drawFortune() {
-  let index;
-  do {
-    index = Math.floor(Math.random() * fortunes.length);
-  } while (fortunes.length > 1 && index === previous);
+    <p class="footer">
+      Take what inspires you and leave a little room for magic.<br>
+      Lucky numbers are for fun and tradition, not lottery predictions.
+    </p>
+  </main>
 
-  previous = index;
-  document.getElementById("message").textContent =
-    fortunes[index];
-}
+  <script>
+    const fortunes = [
+      {
+        message: "A wonderful opportunity will appear when you least expect it.",
+        numbers: [3, 11, 18, 27, 42]
+      },
+      {
+        message: "Your kindness today will return to you threefold.",
+        numbers: [5, 14, 22, 31, 46]
+      },
+      {
+        message: "A new adventure is closer than you think.",
+        numbers: [7, 16, 25, 34, 49]
+      },
+      {
+        message: "The smallest step forward can lead to your greatest success.",
+        numbers: [2, 13, 21, 36, 44]
+      },
+      {
+        message: "Good fortune favors the courage to begin.",
+        numbers: [8, 17, 23, 32, 41]
+      },
+      {
+        message: "Someone is about to bring unexpected joy into your life.",
+        numbers: [4, 12, 26, 35, 48]
+      },
+      {
+        message: "Your patience is quietly building something extraordinary.",
+        numbers: [6, 19, 24, 38, 45]
+      },
+      {
+        message: "A dream you almost forgot is ready to bloom.",
+        numbers: [1, 15, 28, 33, 47]
+      },
+      {
+        message: "Trust your instincts; they know the way forward.",
+        numbers: [9, 18, 27, 39, 43]
+      },
+      {
+        message: "Happiness will find you in an ordinary moment.",
+        numbers: [10, 20, 29, 37, 50]
+      },
+      {
+        message: "A pleasant surprise will brighten your coming days.",
+        numbers: [3, 14, 24, 36, 45]
+      },
+      {
+        message: "Your next great idea will come when you relax.",
+        numbers: [6, 11, 22, 34, 48]
+      },
+      {
+        message: "Believe in yourself, especially when the path seems uncertain.",
+        numbers: [2, 17, 26, 39, 44]
+      },
+      {
+        message: "A friendship will open the door to a new opportunity.",
+        numbers: [5, 16, 28, 31, 47]
+      },
+      {
+        message: "The universe rewards those who keep an open heart.",
+        numbers: [7, 12, 23, 35, 42]
+      },
+      {
+        message: "A little risk may bring a wonderful reward.",
+        numbers: [1, 19, 25, 33, 46]
+      },
+      {
+        message: "Your hard work is about to speak for itself.",
+        numbers: [8, 13, 21, 37, 49]
+      },
+      {
+        message: "Love grows where laughter and honesty meet.",
+        numbers: [4, 15, 27, 32, 50]
+      },
+      {
+        message: "A change of scenery will refresh your spirit.",
+        numbers: [9, 14, 29, 38, 41]
+      },
+      {
+        message: "The answer you seek may be simpler than you imagine.",
+        numbers: [10, 18, 24, 34, 43]
+      },
+      {
+        message: "Money may come from an unexpected direction.",
+        numbers: [3, 17, 26, 40, 48]
+      },
+      {
+        message: "You are closer to your goal than you realize.",
+        numbers: [6, 12, 25, 31, 44]
+      },
+      {
+        message: "A generous heart attracts beautiful experiences.",
+        numbers: [2, 16, 23, 37, 45]
+      },
+      {
+        message: "Today is a good day to turn a maybe into a yes.",
+        numbers: [5, 11, 28, 39, 47]
+      },
+      {
+        message: "Your unique talents will soon be noticed.",
+        numbers: [7, 19, 22, 33, 50]
+      },
+      {
+        message: "A peaceful mind makes room for a lucky breakthrough.",
+        numbers: [1, 13, 27, 36, 42]
+      },
+      {
+        message: "Someone appreciates you more than they say.",
+        numbers: [4, 18, 21, 35, 49]
+      },
+      {
+        message: "An old problem will soon reveal a new solution.",
+        numbers: [8, 15, 24, 32, 46]
+      },
+      {
+        message: "Your future holds a reason to celebrate.",
+        numbers: [9, 12, 26, 38, 43]
+      },
+      {
+        message: "Say yes to the invitation that sparks your curiosity.",
+        numbers: [10, 17, 29, 34, 41]
+      },
+      {
+        message: "A bold choice today may become tomorrow's best memory.",
+        numbers: [3, 16, 22, 37, 48]
+      },
+      {
+        message: "Your confidence is the key that opens the next door.",
+        numbers: [5, 14, 25, 33, 45]
+      },
+      {
+        message: "A lucky coincidence will arrive at just the right time.",
+        numbers: [2, 11, 28, 40, 47]
+      },
+      {
+        message: "The people you meet today may shape your tomorrow.",
+        numbers: [6, 19, 23, 31, 50]
+      },
+      {
+        message: "Let go of what weighs you down to welcome what lifts you up.",
+        numbers: [1, 15, 24, 36, 44]
+      },
+      {
+        message: "Your next chapter will be brighter than your last.",
+        numbers: [7, 13, 27, 39, 46]
+      },
+      {
+        message: "A little humor will turn a difficult day around.",
+        numbers: [4, 17, 21, 34, 42]
+      },
+      {
+        message: "An unexpected message will bring good news.",
+        numbers: [8, 12, 29, 35, 49]
+      },
+      {
+        message: "Your persistence will turn an obstacle into a stepping stone.",
+        numbers: [9, 16, 26, 32, 45]
+      },
+      {
+        message: "The right moment often comes after you take the first step.",
+        numbers: [10, 14, 23, 38, 47]
+      },
+      {
+        message: "A new connection will inspire an exciting possibility.",
+        numbers: [3, 18, 25, 41, 46]
+      },
+      {
+        message: "Give yourself credit for how far you have come.",
+        numbers: [5, 12, 27, 33, 48]
+      },
+      {
+        message: "A quiet act of kindness will make a lasting difference.",
+        numbers: [2, 19, 22, 36, 43]
+      },
+      {
+        message: "Your luck improves when you make room for new ideas.",
+        numbers: [6, 15, 28, 37, 41]
+      },
+      {
+        message: "Something you share today will return as a blessing.",
+        numbers: [1, 11, 24, 35, 50]
+      },
+      {
+        message: "The courage to change your mind is a special strength.",
+        numbers: [7, 17, 26, 34, 44]
+      },
+      {
+        message: "A joyful occasion is waiting just around the corner.",
+        numbers: [4, 13, 29, 32, 47]
+      },
+      {
+        message: "Your best investment is the time you spend growing.",
+        numbers: [8, 18, 21, 39, 45]
+      },
+      {
+        message: "A little faith and a little action can change everything.",
+        numbers: [9, 14, 25, 37, 42]
+      },
+      {
+        message: "Good things are gathering momentum in your life.",
+        numbers: [10, 16, 23, 31, 49]
+      }
+    ];
 
-drawFortune();
-</script>
+    let previousIndex = -1;
+
+    function openFortune() {
+      let index;
+
+      do {
+        index = Math.floor(Math.random() * fortunes.length);
+      } while (fortunes.length > 1 && index === previousIndex);
+
+      previousIndex = index;
+
+      const selected = fortunes[index];
+
+      document.getElementById("fortune").textContent =
+        selected.message;
+
+      const numbersContainer = document.getElementById("numbers");
+      numbersContainer.replaceChildren();
+
+      selected.numbers.forEach(number => {
+        const ball = document.createElement("span");
+        ball.className = "number";
+        ball.textContent = number;
+        numbersContainer.appendChild(ball);
+      });
+    }
+
+    document.getElementById("newFortune").addEventListener(
+      "click",
+      openFortune
+    );
+
+    openFortune();
+  </script>
 </body>
 </html>
